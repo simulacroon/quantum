@@ -374,6 +374,27 @@ const secuencia = [
 
 ];
 
+    /* enlace */
+.vimeo-link{
+  color:#aaa;
+  text-decoration:none;
+  transition:color .3s ease, letter-spacing .3s ease;
+}
+
+/* interacción */
+.vimeo-link:hover{
+  color:#63ff7a;
+  letter-spacing:4px;
+}
+
+.vimeo-link::before{
+  content:"[ ";
+}
+
+.vimeo-link::after{
+  content:" ]";
+}
+
 
 
 /* =======================================================
@@ -638,6 +659,17 @@ function hacerArrastrable(elemento){
     });
 
 }
+
+      <p class="copyright">
+  <a href="https://www.instagram.com/____quantum" target="_blank" class="vimeo-link">
+    vimeo
+  </a>
+  @ simulacroon
+  @___quantum
+</p>
+
+</footer>
+    
 
 </script>
 
