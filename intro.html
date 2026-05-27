@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>D-R4M</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Space Mono', monospace;
+}
+
+body{
+    overflow:hidden;
+    background:black;
+    color:white;
+    width:100vw;
+    height:100vh;
+    position:relative;
+}
+
+/* VIDEO FONDO */
+
+#fondo{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.2;
+}
+
+/* TEXTO CENTRAL */
+
+#mensaje{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    text-align:center;
+    z-index:10;
+}
+
+#mensaje h1{
+    font-size:3rem;
+    letter-spacing:4px;
+}
+
+#mensaje p{
+    margin-top:10px;
+    opacity:0.7;
+}
+
+/* VENTANAS */
+
+.ventana{
+    position:absolute;
+    background:rgba(20,20,20,0.95);
+    border:2px solid white;
+    border-radius:10px;
+    overflow:hidden;
+
+    box-shadow:
+    0 0 20px rgba(255,255,255,0.2);
+
+    animation:aparecer 0.3s ease;
+}
+
+.barra{
+
+    width:100%;
+    height:35px;
+
+    background:white;
+    color:black;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 10px;
+
+    font-size:14px;
+    font-weight:bold;
+}
+
+.cerrar{
+    cursor:pointer;
+    font-size:18px;
+}
+
+.contenido{
+    padding:10px;
+    width:100%;
+    height:calc(100% - 35px);
+}
+
+/* IMAGENES */
+
+.contenido img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:5px;
+}
+
+/* VIDEOS */
+
+.contenido video{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    border-radius:5px;
+}
+
+/* TEXTOS */
+
+.contenido p{
+
+    font-size:15px;
+    line-height:1.6;
+
+    color:white;
+}
+
+/* ANIMACION */
+
+@keyframes aparecer{
+
+    from{
+
+        transform:scale(0.3);
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:scale(1);
+        opacity:1;
+
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- VIDEO FONDO -->
+
+<video id="fondo" autoplay muted loop>
+
+    <source src="img/osci_2.mp4" type="video/mp4">
+
+</video>
+
+<!-- TEXTO CENTRAL -->
+
+<div id="mensaje">
+
+    <h1>D-R4M :</h1>
+
+    <p>Quantum & Simulacroon</p>
+
+    <p>ENTER / TAP</p>
+
+</div>
+
+<!-- SONIDO -->
+<!-- MUSICA FONDO -->
+
+<audio
+id="musica"
+src="sound/F.M.wav"
+autoplay
+loop>
+</audio>
+
+<!-- GLITCH -->
+
+<audio
+id="glitch"
+src="sound/glitch.wav">
+</audio>
+
+<script>
+
+/* =======================================================
+SECUENCIA NARRATIVA
+AQUI CONTROLAS EL ORDEN EXACTO
+======================================================= */
+
+const secuencia = [
+
+/* 1 */
+
+{
+    tipo:"video",
+
+    archivo:"img/19_1.mp4",
+
+    titulo:"D_R4M",
+
+    width:520,
+    height:320
+},
+
+/* 2 */
+
+{
+    tipo:"texto",
+
+    titulo:"D_R4M LIVE ACT",
+
+    contenido:`
+
+    D_R4M es un circuito cerrado, interconectado a la misma memoria RAM, donde
+    texturas sonoras densas, pulsos mecánicos,
+    y visuales generativos reaccionan como
+    paisajes digitales que operan como
+    simulaciones producidas por bases de datos.
+
+    `,
+
+    width:420,
+    height:300
+},
+
+/* 3 */
+
+{
+    tipo:"imagen",
+
+    archivo:"img/H04A0994.jpg",
+
+    titulo:"KAPUTT FESTIVAL FUTURO 2026",
+
+    width:350,
+    height:420
+},
+
+
+/* 4 */
+
+{
+    tipo:"texto",
+
+    titulo:"LIVE_ACT",
+
+    contenido:`
+
+    el live act es un espacio
+    de observación, resonancia y expansión
+    sensorial.
+
+    Entre synthwave, datos y acid-fantasy, se despliegan mundos
+    hiperreales donde cuerpo, código y
+    ficción se entrelazan como un laboratorio
+    de percepción en tiempo real.
+
+    `,
+
+    width:450,
+    height:320
+},
+
+
+
+/* 5 */
+
+{
+    tipo:"imagen",
+
+    archivo:"img/1.jpg",
+
+    titulo:"DATA DR3AMS",
+
+    width:300,
+    height:380
+},
+/* 6 */
+
+{
+    tipo:"imagen",
+
+    archivo:"img/2.jpg",
+
+    titulo:"KAPUTT FESTIVAL FUTURO 2026",
+
+    width:320,
+    height:400
+},
+
+/* 7 */
+
+{
+    tipo:"imagen",
+
+    archivo:"img/7.jpg",
+
+    titulo:"DATADR3ANS KFF",
+
+    width:340,
+    height:420
+},
+
+/* 8 */
+
+{
+    tipo:"imagen",
+
+    archivo:"img/4.jpg",
+
+    titulo:"CACHE_SIGNAL",
+
+    width:360,
+    height:410
+},
+
+/* 9 */
+
+{
+    tipo:"imagen",
+
+    archivo:"img/5.jpg",
+
+    titulo:"DATADR3AMS LIVE",
+
+    width:300,
+    height:390
+},
+
+/* 10 */
+
+{
+    tipo:"link",
+
+    archivo:"img/00.jpeg",
+
+    titulo:"SIMULACROON",
+
+    url:"https://simulacroon.bandcamp.com/",
+
+    width:340,
+    height:420
+},
+
+/* 11 */
+
+{
+    tipo:"link",
+
+    archivo:"img/QUANTUM.png",
+
+    titulo:"QUANTUM",
+
+    url:"https://oscarbravo.framer.website",
+
+    width:360,
+    height:420
+},
+
+];
+
+
+
+/* =======================================================
+VARIABLES
+======================================================= */
+
+let contador = 0;
+
+let indice = 0;
+
+/* =======================================================
+ENTER DESKTOP
+======================================================= */
+
+document.addEventListener("keydown",(e)=>{
+
+    if(e.key === "Enter"){
+
+        crearVentana();
+
+    }
+
+});
+
+/* =======================================================
+TAP MOBILE
+======================================================= */
+
+document.addEventListener("touchstart",()=>{
+
+    crearVentana();
+
+});
+
+/* =======================================================
+CREAR VENTANA
+======================================================= */
+
+function crearVentana(){
+
+    /* reiniciar secuencia */
+
+    if(indice >= secuencia.length){
+
+        indice = 0;
+
+    }
+
+    /* obtener item actual */
+
+    const item = secuencia[indice];
+
+    contador++;
+
+    /* crear ventana */
+
+    const ventana = document.createElement("div");
+
+    ventana.classList.add("ventana");
+
+    /* tamaño */
+
+    ventana.style.width =
+    item.width + "px";
+
+    ventana.style.height =
+    item.height + "px";
+
+    /* posicion */
+
+    ventana.style.left =
+
+    Math.random() *
+    (window.innerWidth - item.width)
+
+    + "px";
+
+    ventana.style.top =
+
+    Math.random() *
+    (window.innerHeight - item.height)
+
+    + "px";
+
+    /* contenido */
+
+    let contenidoHTML = "";
+
+    /* VIDEO */
+
+    if(item.tipo === "video"){
+
+        contenidoHTML = `
+
+        <video autoplay muted loop playsinline>
+
+            <source
+            src="${item.archivo}"
+            type="video/mp4">
+
+        </video>
+
+        `;
+
+    }
+
+    /* IMAGEN */
+
+    if(item.tipo === "imagen"){
+
+        contenidoHTML = `
+
+        <img src="${item.archivo}">
+
+        `;
+
+    }
+
+    /* TEXTO */
+
+    if(item.tipo === "texto"){
+
+        contenidoHTML = `
+
+        <p>${item.contenido}</p>
+
+        `;
+
+    }
+
+    /* LINK EXTERNO */
+
+ if(item.tipo === "link"){
+
+    contenidoHTML = `
+
+    <a
+    href="${item.url}"
+    target="_blank">
+
+        <img src="${item.archivo}">
+
+    </a>
+
+    `;
+
+}
+
+    /* HTML FINAL */
+
+    ventana.innerHTML = `
+
+        <div class="barra">
+
+            <span>${item.titulo}</span>
+
+            <span class="cerrar">✕</span>
+
+        </div>
+
+        <div class="contenido">
+
+            ${contenidoHTML}
+
+        </div>
+
+    `;
+
+    /* agregar */
+
+    document.body.appendChild(ventana);
+
+    /* sonido */
+
+    const glitch =
+    document.getElementById("glitch");
+
+    glitch.currentTime = 0;
+
+     glitch.play();
+
+    /* cerrar */
+
+    ventana.querySelector(".cerrar")
+    .addEventListener("click",()=>{
+
+        ventana.remove();
+
+    });
+
+    /* arrastrar */
+
+    hacerArrastrable(ventana);
+
+    /* siguiente elemento */
+
+    indice++;
+
+}
+
+/* =======================================================
+DRAG WINDOWS
+======================================================= */
+
+function hacerArrastrable(elemento){
+
+    let moviendo = false;
+
+    let offsetX = 0;
+    let offsetY = 0;
+
+    const barra =
+    elemento.querySelector(".barra");
+
+    barra.addEventListener("mousedown",(e)=>{
+
+        moviendo = true;
+
+        offsetX =
+        e.clientX - elemento.offsetLeft;
+
+        offsetY =
+        e.clientY - elemento.offsetTop;
+
+    });
+
+    document.addEventListener("mousemove",(e)=>{
+
+        if(!moviendo) return;
+
+        elemento.style.left =
+
+        (e.clientX - offsetX)
+
+        + "px";
+
+        elemento.style.top =
+
+        (e.clientY - offsetY)
+
+        + "px";
+
+    });
+
+    document.addEventListener("mouseup",()=>{
+
+        moviendo = false;
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
