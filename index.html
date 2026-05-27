@@ -184,8 +184,8 @@ body{
 <audio
 id="musica"
 src="sound/cancion.mp3"
-autoplay
-loop>
+loop
+preload="auto">
 </audio>
 
 <!-- GLITCH -->
@@ -551,7 +551,15 @@ function crearVentana(){
     const musica =
     document.getElementById("musica");
 
-    musica.play();
+    if(musica.paused){
+
+    musica.play().catch(err=>{
+
+        console.log(err);
+
+    });
+
+}
 
     const glitch =
     document.getElementById("glitch");
