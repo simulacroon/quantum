@@ -133,6 +133,118 @@ body{
     color:white;
 }
 
+    /* LINKS */
+
+.portal{
+
+    position:relative;
+
+    width:100%;
+    height:100%;
+
+    cursor:pointer;
+
+    overflow:hidden;
+
+}
+
+.portal img{
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+/* OVERLAY */
+
+.portalOverlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.2);
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:center;
+
+    padding-bottom:20px;
+
+    transition:0.3s;
+
+}
+
+/* TEXTO */
+
+.portalTexto{
+
+    color:white;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    opacity:0.7;
+
+    text-transform:uppercase;
+
+}
+
+/* EFECTO HOVER */
+
+.portal:hover .portalOverlay{
+
+    background:rgba(255,255,255,0.08);
+
+}
+
+/* FOOTER */
+
+footer{
+
+    position:fixed;
+
+    bottom:10px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    z-index:99999;
+
+    font-size:11px;
+
+    opacity:0.5;
+
+    display:flex;
+
+    gap:15px;
+
+    letter-spacing:2px;
+
+}
+
+/* LINKS FOOTER */
+
+footer a{
+
+    color:white;
+
+    text-decoration:none;
+
+}
+
+footer a:hover{
+
+    opacity:1;
+
+}
+
 /* ANIMACION */
 
 @keyframes aparecer{
@@ -505,22 +617,32 @@ function crearVentana(){
 
     /* LINK EXTERNO */
 
- if(item.tipo === "link"){
+if(item.tipo === "link"){
 
     contenidoHTML = `
 
-    <a
-    href="${item.url}"
-    target="_blank">
+    <div
+    class="portal"
+    data-url="${item.url}">
 
         <img src="${item.archivo}">
 
-    </a>
+        <div class="portalOverlay">
+
+            <div class="portalTexto">
+
+                HOLD TO ENTER
+
+            </div>
+
+        </div>
+
+    </div>
 
     `;
 
-}
-
+ }
+    
     /* HTML FINAL */
 
     ventana.innerHTML = `
@@ -544,6 +666,67 @@ function crearVentana(){
     /* agregar */
 
     document.body.appendChild(ventana);
+
+    /* =========================================
+PORTAL HOLD
+========================================= */
+
+const portal =
+ventana.querySelector(".portal");
+
+if(portal){
+
+    let holdTimer;
+
+    // DESKTOP
+
+    portal.addEventListener("mousedown",()=>{
+
+        holdTimer = setTimeout(()=>{
+
+            window.open(
+                portal.dataset.url,
+                "_blank"
+            );
+
+        },600);
+
+    });
+
+    portal.addEventListener("mouseup",()=>{
+
+        clearTimeout(holdTimer);
+
+    });
+
+    portal.addEventListener("mouseleave",()=>{
+
+        clearTimeout(holdTimer);
+
+    });
+
+    // MOBILE
+
+    portal.addEventListener("touchstart",()=>{
+
+        holdTimer = setTimeout(()=>{
+
+            window.open(
+                portal.dataset.url,
+                "_blank"
+            );
+
+        },600);
+
+    });
+
+    portal.addEventListener("touchend",()=>{
+
+        clearTimeout(holdTimer);
+
+    });
+
+}
 
     /* sonido */
 
@@ -641,6 +824,30 @@ function hacerArrastrable(elemento){
     
 
 </script>
+
+    <footer>
+
+    <span>
+        © D-R4M 2026
+    </span>
+
+    <a
+    href="https://instagram.com/simulacroon"
+    target="_blank">
+
+        @simulacroon
+
+    </a>
+
+    <a
+    href="https://instagram.com/____quantum"
+    target="_blank">
+
+        @____quantum
+
+    </a>
+
+</footer>
 
 </body>
 </html>
